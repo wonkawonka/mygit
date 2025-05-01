@@ -263,8 +263,8 @@ class Exp_GTA_DAD(Exp_Basic):
         from sklearn.metrics import classification_report
         # 假设预测值大于某个阈值为异常（1），否则为正常（0），目前缺乏一个维度，判断预测值是否正常，预测值要处理后才能和标签对比
         diff_tensor = preds - trues  # shape: (batch_size, sequence_length, num_features)
-        abs_diff_tensor = torch.abs(diff_tensor)  # shape: (batch_size, sequence_length, num_features)
-        mean_abs_diff_tensor = torch.mean(abs_diff_tensor, dim=-1)  # shape: (batch_size, sequence_length)
+        abs_diff_tensor = np.abs(diff_tensor)  # shape: (batch_size, sequence_length, num_features)
+        mean_abs_diff_tensor = np.mean(abs_diff_tensor, dim=-1)  # shape: (batch_size, sequence_length)
         threshold = 0.5
         binary_preds = (mean_abs_diff_tensor > threshold).astype(int).flatten()
         binary_labels = labels.flatten()
