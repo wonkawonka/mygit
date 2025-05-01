@@ -262,7 +262,7 @@ class Exp_GTA_DAD(Exp_Basic):
         # 添加准确率、召回率和F1分数的计算
         from sklearn.metrics import classification_report
         # 假设预测值大于某个阈值为异常（1），否则为正常（0），目前缺乏一个维度，判断预测值是否正常，预测值要处理后才能和标签对比
-        diff_tensor = preds - true  # shape: (batch_size, sequence_length, num_features)
+        diff_tensor = preds - trues  # shape: (batch_size, sequence_length, num_features)
         abs_diff_tensor = torch.abs(diff_tensor)  # shape: (batch_size, sequence_length, num_features)
         mean_abs_diff_tensor = torch.mean(abs_diff_tensor, dim=-1)  # shape: (batch_size, sequence_length)
         threshold = 0.5
